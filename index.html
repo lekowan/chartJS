@@ -25,12 +25,11 @@
 	  .then(function(response) {
 	    return response.json();
 	  })
-	  .then(function(myJson) {
-		  	console.log(JSON.stringify(myJson))
+	  .then(function(dataset) {
+		  	//console.log(JSON.stringify(dataset))
 
 	    	var ctx = document.getElementById('chart-container').getContext('2d');
-	    	var data1 = myJson['data1'];
-	    	var data2 = myJson['data2'];
+
 
 
 		  	var labelsArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'];
@@ -41,9 +40,13 @@
 			    type: 'line',
 
 			    // The data for our dataset
+			    
 			    data: {
 			        labels: labelsArray ,
-			        datasets: [{
+			        //datasets : 'dummy'
+			        /*
+			        datasets: 
+			        [{
 			           	label: 'Allocation',
 			           	backgroundColor: 'transparent',
 			            borderColor: 'rgb(0, 100, 150)',
@@ -55,7 +58,9 @@
 			            borderColor: 'rgb(88, 44, 131)',
 			            data: data2
 			        }]
+			        */
 			    },
+			    
 
 			    // Configuration options go here
 			    options: {
@@ -90,6 +95,20 @@
 						}
 					}
 			};
+
+			let array = [];
+
+			for(data in dataset){
+				//config.data[datasets]
+				array.push(dataset[data]);
+
+			}
+
+			config.data.datasets = array;
+
+			//console.log('array', array);
+			//var data1 = dataset['data1'];
+	    	//var data2 = dataset['data2'];
 
 					window.myLine = new Chart(ctx, config);
 	 });
